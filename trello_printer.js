@@ -38,6 +38,7 @@ function add_button(json_url){
 	newbutton.setAttribute('class','header-btn');
 	//newbutton.setAttribute('onclick','board_call('+json_url+')');
 	newbutton.innerHTML = 'PrettyPrint';
+	//newbutton.href = 'http://trello.com/prettyprint';
 	buttons.appendChild(newbutton);
 	newbutton.addEventListener("click",function () {board_call(json_url,board_callback)});
 }
@@ -142,23 +143,136 @@ function board_callback(board_object) {
 				temp.labels = get_labels(board_object.cards[j].labels);
 				tp_list.cards.push(temp);
 
-				// tp_list.cards[j] = {};
-				// tp_list.cards[j].name = board_object.cards[j].name;
-				// tp_list.cards[j].desc = board_object.cards[j].desc;
-				// tp_list.cards[j].due = board_object.cards[j].due;
-
-				// tp_list.cards[j].members = get_members(board_object.cards[j].idMembers);
-
-				// tp_list.cards[j].checklists = get_checklists(board_object.cards[j].idChecklists);
-
-				// tp_list.cards[j].labels = get_labels(board_object.cards[j].labels);
-
 			}
 		}
 
 	}
+	var items_to_print = document.createElement('div');
+	for (var i in tp_lists){
+		var listdiv = document.createElement('div');
+		
+		var list_title = document.createElement('span');
+		list_title.setAttribute('class','list_titles');
+		list_title.innerHTML = tp_lists[i].name;
+		listdiv.appendChild(list_title);
+
+		
+		var current_card = tp_lists[i].cards;
+		for (var j in current_card){
+			var card_to_add = document.createElement('div');
+			
+
+			var card_title = document.createElement('div');
+			card_title.setAttribute('class','card_titles');
+			
+			for (var k in current_card[j].labels){
+				if (k == 0) {
+					var card_labels = document.createElement('span');
+					card_labels.setAttribute('class','card_labels');
+					card_labels.innerHTML = '[';
+					// card_title.innerHTML = '[';
+					
+				}
+				else {
+					card_labels.innerHTML += ', ';
+					// card_title.innerHTML += ', ';
+				}
+				// card_title.innerHTML += current_card[j].labels[k];
+				card_labels.innerHTML += current_card[j].labels[k];
+				if (k == current_card[j].labels.length - 1){
+					card_labels.innerHTML += ']';
+					// card_title.innerHTML += ']';
+				}
+				card_title.appendChild(card_labels);
+			}
+			
+
+			var card_title_text = document.createElement('span');
+			card_title_text.setAttribute('class','card_title_text');
+			card_title_text.innerHTML = current_card[j].name;
+			card_title.appendChild(card_title_text);
+						
+			for (var k in current_card[j].members){
+				if (k == 0) {
+					var card_members = document.createElement('span');
+					card_members.setAttribute('class','card_members');
+					card_members.innerHTML = '(';
+					// card_title.innerHTML = '[';
+					
+				}
+				else {
+					card_labels.innerHTML += ', ';
+					// card_title.innerHTML += ', ';
+				}
+				// card_title.innerHTML += current_card[j].labels[k];
+				card_members.innerHTML += current_card[j].members[k];
+				if (k == current_card[j].members.length - 1){
+					card_members.innerHTML += ')';
+					// card_title.innerHTML += ']';
+				}
+				card_title.appendChild(card_members);
+			}
+
+
+			card_to_add.appendChild(card_title);
+
+			var card_description = document.createElement('span');
+			card_description.setAttribute('class','descriptions');
+			card_description.innerHTML = current_card[j].desc;
+			card_to_add.appendChild(card_description);
+
+
+			var card_checklists = document.createElement('div');
+			card_checklists.setAttribute('class','checklists');
+			for (var k in current_card[j].checklists){
+				var current_checklist = current_card[j].checklists[k];
+
+				var checklist_title = document.createElement('span')
+				checklist_title.setAttribute('class','checklist_titles');
+				checklist_title.innerHTML = current_checklist.name;
+
+				var my_checklist = document.createElement('ul');
+				my_checklist.setAttribute('class','checklists');
+
+				
+				for (var l in current_checklist.items){
+					
+					var my_checklist_item = document.createElement('li');
+					my_checklist_item.setAttribute('class','checklist_items');
+
+					my_checklist_item.innerHTML = (current_checklist.items[l].state=='incomplete'?'[ &nbsp; ] ':'[&#x2713;] ');
+					
+					my_checklist_item.innerHTML += current_checklist.items[l].name
+				
+					my_checklist.appendChild(my_checklist_item);
+				}
+				card_checklists.appendChild(checklist_title);
+				card_checklists.appendChild(my_checklist);
+
+			}
+			card_to_add.appendChild(card_checklists);
+
+
+
+			listdiv.appendChild(card_to_add);
+		}
+
+
+		items_to_print.appendChild(listdiv);
+	}
+
+	var newwindow = window.open('','','height=800 width=800');
+
+	
+	var css = document.createElement('link');
+	css.setAttribute('rel','stylesheet');
+	css.setAttribute('type','text/css');
+	css.setAttribute('href','(the correct URL)');
+
+	newwindow.document.head.appendChild(css);
+
+	newwindow.document.body.appendChild(items_to_print);
 
 }
-
 
 isReady();
