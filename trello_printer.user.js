@@ -7,7 +7,7 @@
 (
 function () {
   temp = document.createElement('script');
-  temp.setAttribute('src', 'https://raw.githubusercontent.com/scooterx3/trello_printer/master/trello_printer.js');
+  temp.setAttribute('src', 'https://rawgit.com/scooterx3/trello_printer/master/trello_printer.js');
   document.body.appendChild(temp);
 } ()
 );
