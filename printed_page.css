@@ -1,11 +1,12 @@
 .list_titles{
-	font-size:18px;
+	font-size:12px;
 	font-weight:bold;
 }
 
 .card_titles{
-	font-size:15px;
+	font-size:10px;
 	margin:10px;
+	padding:5px;
 }
 
 .card_title_text{
@@ -15,20 +16,20 @@
 
 .checklists{
 	list-style-type: none;
-	font-size: 15px;
+	font-size: 10px;
 	margin-top:0px;
 }
 
 .card_members{
-	font-size:12px;
+	font-size:8px;
 }
 
 .checklist_titles{
-	margin:15px;
+	margin:10px;
 
 }
 
 .descriptions{
-	margin:15px;
+	margin:10px;
 
 }
