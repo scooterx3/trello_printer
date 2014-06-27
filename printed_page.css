@@ -12,6 +12,7 @@
 
 .card_titles{
 	font-size:10px;
+	padding-left:25px;
 }
 
 .card_title_text{
@@ -21,6 +22,7 @@
 .checklists{
 	list-style-type: none;
 	font-size: 10px;
+	padding-left:35px;
 
 .card_members{
 	font-size:8px;
@@ -29,4 +31,5 @@
 
 .descriptions{
 	font-size:8px;
+	padding-left:35px;
 }
