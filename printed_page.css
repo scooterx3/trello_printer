@@ -11,7 +11,7 @@
 
 .card_title_text{
 	font-weight: bold;
-	padding: 5px;
+	padding: 1px;
 }
 
 .checklists{
@@ -31,5 +31,5 @@
 
 .descriptions{
 	margin:10px;
-
+	font-size:8px;
 }
