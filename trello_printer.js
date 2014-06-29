@@ -23,12 +23,6 @@ function gobabygo() {
   	});
 	add_button(json_url);
 	
-
-	// console.log('url: '+document.URL);
-	// var path_array = window.location.pathname.split( '/' );
-	// var json_url = window.location.protocol+'//'+window.location.host+'/'+path_array[1]+'/'+path_array[2]+'.json';
-	// console.log('json_url: '+json_url);
-	// board_call(json_url,board_callback);
 }
 
 function add_button(json_url){
@@ -214,13 +208,14 @@ function board_callback(board_object) {
 			}
 
 
-			card_to_add.appendChild(card_title);
+			
 
 			var card_description = document.createElement('span');
 			card_description.setAttribute('class','descriptions');
 			card_description.innerHTML = current_card[j].desc;
-			card_to_add.appendChild(card_description);
+			card_title.appendChild(card_description);
 
+			card_to_add.appendChild(card_title);
 
 			var card_checklists = document.createElement('div');
 			card_checklists.setAttribute('class','checklists');
@@ -268,7 +263,7 @@ function board_callback(board_object) {
 	css.setAttribute('rel','stylesheet');
 	css.setAttribute('type','text/css');
 	css.setAttribute('href','https://raw.githubusercontent.com/scooterx3/trello_printer/master/printed_page.css');
-
+	
 	newwindow.document.head.appendChild(css);
 
 	newwindow.document.body.appendChild(items_to_print);
